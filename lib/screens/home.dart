@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:untitled/widgets/right_bar.dart';
-// import 'package:untitled/widgets/left_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,14 +10,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _heightController = TextEditingController();
   TextEditingController _weightController = TextEditingController();
-  double bmiResult=0;
-  String textResult="";
+  double bmiResult = 0;
+  String textResult = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("BMI calculator",
-            style:TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+        title: const Text("BMI calculator",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
@@ -28,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -37,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: TextField(
                     controller: _heightController,
                     style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300,
-                        ),
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    ),
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -57,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller: _weightController,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300,
-                        ),
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    ),
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -73,41 +73,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             TextButton(
-              child: Text("Calculate",style: TextStyle(color: Colors.black),),
-              onPressed: ((){
-                double _h=double.parse(_heightController.text);
-                double _w=double.parse(_weightController.text);
+                child: Text(
+                  "Calculate",
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: (() {
+                  double _h = double.parse(_heightController.text);
+                  double _w = double.parse(_weightController.text);
 
-                setState(() {
-                  bmiResult=_w/(_h*_h);
-                  if(bmiResult>25)
-                    {
-                      textResult="You're over-weight";
+                  setState(() {
+                    bmiResult = _w / (_h * _h);
+                    if (bmiResult > 25) {
+                      textResult = "You're over-weight";
+                    } else if (bmiResult >= 18.5 && bmiResult <= 25) {
+                      textResult = "You have normal weight";
+                    } else {
+                      textResult = "You're under-weight";
                     }
-                  else if(bmiResult>=18.5 && bmiResult<=25)
-                    {
-                      textResult="You have normal weight";
-                    }
-                  else
-                  {
-                    textResult="You're under-weight";
-                  }
-                });
-              }),
-              style:TextButton.styleFrom(backgroundColor: Colors.white)
+                  });
+                }),
+                style: TextButton.styleFrom(backgroundColor: Colors.white)),
+            SizedBox(
+              height: 30,
             ),
-            SizedBox(height: 30,),
             Container(
-              child: Text(bmiResult.toString(),style: TextStyle(fontSize: 50),),
+              child: Text(
+                bmiResult.toString(),
+                style: TextStyle(fontSize: 50),
+              ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             Container(
               child: Text(textResult.toString()),
             ),
-            SizedBox(height: 30,),
-
+            SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
